@@ -54,3 +54,27 @@ body {
   height: 60px;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* Custom button styles
+-------------------------------------------------- */
+
+#button-google-auth {
+    background: url(images/btn_google_signin_dark_normal_web.png);
+    cursor: pointer;
+    border: none;
+    height: 46px;
+    width: 191px;
+    background-repeat: no-repeat;
+    transition: 0.3s;
+}
+
+#button-google-auth:hover {
+    background: url(images/btn_google_signin_dark_pressed_web.png);
+    box-shadow: none;
+}
+
+#button-google-auth:focus {
+    background: url(images/btn_google_signin_dark_focus_web.png);
+    box-shadow: none;
+    transition: 0.3s;
+}
