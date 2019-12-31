@@ -3,15 +3,17 @@ using System;
 using ADAssignment.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace ADAssignment.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191230124121_TvShow")]
+    partial class TvShow
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,24 +21,28 @@ namespace ADAssignment.Migrations
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("ADAssignment.Models.ToDoList", b =>
+            modelBuilder.Entity("ADAssignment.Models.TvShow", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(60);
+                    b.Property<int>("Genre");
 
-                    b.Property<DateTime>("DueDate");
+                    b.Property<string>("ImageUrl")
+                        .IsRequired();
 
-                    b.Property<string>("Name")
+                    b.Property<string>("ImdbUrl")
+                        .IsRequired();
+
+                    b.Property<decimal>("Rating");
+
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(60);
 
                     b.HasKey("Id");
 
-                    b.ToTable("ToDoList");
+                    b.ToTable("TvShow");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

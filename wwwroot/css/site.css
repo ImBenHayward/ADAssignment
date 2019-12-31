@@ -78,3 +78,7 @@ body {
     box-shadow: none;
     transition: 0.3s;
 }
+
+.card {
+    margin: 10px;
+}

@@ -65,3 +65,7 @@ D:\Development\AdvancedDevelopment\ADAssignment\ADAssignment\obj\Debug\netcoreap
 D:\Development\AdvancedDevelopment\ADAssignment\ADAssignment\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 D:\Development\AdvancedDevelopment\ADAssignment\ADAssignment\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 D:\Development\AdvancedDevelopment\ADAssignment\ADAssignment\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
+D:\Development\AdvancedDevelopment\ADAssignment\ADAssignment\obj\Debug\netcoreapp2.2\Razor\Views\ToDoList\Index.cshtml.g.cs
+D:\Development\AdvancedDevelopment\ADAssignment\ADAssignment\obj\Debug\netcoreapp2.2\Razor\Views\ToDoList\Add.cshtml.g.cs
+D:\Development\AdvancedDevelopment\ADAssignment\ADAssignment\obj\Debug\netcoreapp2.2\Razor\Views\ToDoList\Edit.cshtml.g.cs
+D:\Development\AdvancedDevelopment\ADAssignment\ADAssignment\obj\Debug\netcoreapp2.2\Razor\Views\ToDoList\Delete.cshtml.g.cs

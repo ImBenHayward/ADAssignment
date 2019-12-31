@@ -18,7 +18,7 @@
 
 
   <ItemGroup>
-    <Folder Include="wwwroot\NewFolder\" />
+    <None Include="wwwroot\js\custom-validation.js" />
   </ItemGroup>
 
 </Project>
