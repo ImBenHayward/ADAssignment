@@ -20,6 +20,8 @@ namespace ADAssignment.Models
 
         [Required]
         [Display(Name = "Due Date")]
-        public DateTime DueDate { get; set; }
+        public DateTime? DueDate { get; set; }
+
+        public string Url { get; set; }
     }
 }

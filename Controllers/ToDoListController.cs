@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using ADAssignment.Data;
+using ADAssignment.Helpers;
+using ADAssignment.Migrations;
 using ADAssignment.Models;
+using Manatee.Trello;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,114 +18,132 @@ namespace ADAssignment.Controllers
     public class ToDoListController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly TrelloManager trelloManager;
+        private readonly List<ToDoList> cardList;
+        
 
         public ToDoListController(ApplicationDbContext context)
         {
-            _context = context;
+            //_context = context;
+            cardList = new List<ToDoList>();
+            trelloManager = new TrelloManager();
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_context.ToDoList.ToList());
-        }
+            var cards = await trelloManager.GetCards();
 
-        public IActionResult Add()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Add(ToDoList toDoList)
-        {
-            if (ModelState.IsValid)
+            foreach (var card in cards)
             {
-                _context.Add(toDoList);
-                _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                var model = new Models.ToDoList();
+
+                model.Name = card.Name;
+                model.Description = card.Description;
+                model.DueDate = card.DueDate;
+                model.Url = card.Url;
+
+                cardList.Add(model);
             }
 
-            return View(toDoList);
-            ;
+            return View(cardList);
         }
 
-        public IActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //public IActionResult Add()
+        //{
+        //    return View();
+        //}
 
-            var toDoTask = _context.ToDoList.Find(id);
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult Add(ToDoList toDoList)
+        //{
+        //    //if (ModelState.IsValid)
+        //    //{
+        //    //    _context.Add(toDoList);
+        //    //    _context.SaveChanges();
+        //    //    return RedirectToAction(nameof(Index));
+        //    //}
 
-            if (toDoTask == null)
-            {
-                return NotFound();
-            }
+        //    return View(toDoList);
+        //}
 
-            return View(toDoTask);
-        }
+        //public IActionResult Edit(int? id)
+        //{
+        //    //if (id == null)
+        //    //{
+        //    //    return NotFound();
+        //    //}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, ToDoList toDoList)
-        {
-            if (id != toDoList.Id)
-            {
-                return NotFound();
-            }
+        //    //var toDoTask = _context.ToDoList.Find(id);
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(toDoList);
-                    _context.SaveChanges();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ToDoTaskExists(toDoList.Id))
-                    {
-                        return NotFound();
-                    }
+        //    //if (toDoTask == null)
+        //    //{
+        //    //    return NotFound();
+        //    //}
 
-                    throw;
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(toDoList);
-        }
+        //    return View(toDoTask);
+        //}
 
-        public IActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult Edit(int id, ToDoList toDoList)
+        //{
+        //    if (id != toDoList.Id)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var toDoList = _context.ToDoList
-                .FirstOrDefault(x => x.Id == id);
-            if (toDoList == null)
-            {
-                return NotFound();
-            }
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            _context.Update(toDoList);
+        //            _context.SaveChanges();
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            if (!ToDoTaskExists(toDoList.Id))
+        //            {
+        //                return NotFound();
+        //            }
 
-            return View(toDoList);
-        }
+        //            throw;
+        //        }
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(toDoList);
+        //}
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
-        {
-            var toDoListItem = _context.ToDoList.Find(id);
-            _context.ToDoList.Remove(toDoListItem);
-            _context.SaveChanges();
-            return RedirectToAction(nameof(Index));
-        }
+        //public IActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-        private bool ToDoTaskExists(int id)
-        {
-            return _context.ToDoList.Any(e => e.Id == id);
-        }
+        //    var toDoList = _context.ToDoList
+        //        .FirstOrDefault(x => x.Id == id);
+        //    if (toDoList == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(toDoList);
+        //}
+
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult DeleteConfirmed(int id)
+        //{
+        //    var toDoListItem = _context.ToDoList.Find(id);
+        //    _context.ToDoList.Remove(toDoListItem);
+        //    _context.SaveChanges();
+        //    return RedirectToAction(nameof(Index));
+        //}
+
+        //private bool ToDoTaskExists(int id)
+        //{
+        //    return _context.ToDoList.Any(e => e.Id == id);
+        //}
     }
 }
