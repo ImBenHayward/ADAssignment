@@ -8,7 +8,7 @@ namespace ADAssignment.Models
 {
     public class ToDoList
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [Required]
         [StringLength(60, MinimumLength = 3)]
@@ -20,7 +20,7 @@ namespace ADAssignment.Models
 
         [Required]
         [Display(Name = "Due Date")]
-        public DateTime? DueDate { get; set; }
+        public DateTime DueDate { get; set; }
 
         public string Url { get; set; }
     }

@@ -44,20 +44,47 @@ namespace ADAssignment.Helpers
 
             return cards;
         }
-        //public async Task<List<ICard>> DisplayCards()
-        //{
 
-        //    var board = GetBoard();
+        public async Task<ICard> GetCard(string id)
+        {
+            var board = GetBoard();
 
-        //    //Authenticate();
+            await board.Result.Cards.Refresh();
 
-        //    //var board = new Board("5e0b6ef2a603db30daa1fa4c", auth);
-        //    //var card = new Card("5e0bad3a22934f0c715b3fd4", auth);
+            var trelloCard = board.Result.Cards.FirstOrDefault(x => x.Id == id);
 
-        //    //await board.Cards.Refresh();
-        //    //var cards = board.Cards.ToList();
+            return trelloCard;
+        }
 
-        //    return cards;
-        //}
+        public async Task AddCard(string name, string description, DateTime dueDate)
+        {
+            var board = GetBoard();
+            var trelloList = board.Result.Lists.FirstOrDefault(x => x.Name == "To Do");
+
+            if (trelloList != null)
+            {
+                await trelloList.Cards.Add(name, description, null, dueDate);
+            }
+        }
+
+        public async Task EditCard(string id, string name, string description, DateTime dueDate)
+        {
+            //var board = GetBoard();
+            var trelloCard = GetCard(id);
+
+            trelloCard.Result.Name = name;
+            trelloCard.Result.Description = description;
+            trelloCard.Result.DueDate = dueDate;
+
+            await TrelloProcessor.Flush();
+        }
+
+        public async Task DeleteCard(string id)
+        {
+            var trelloCard = GetCard(id);
+
+            await trelloCard.Result.Delete();
+        }
+
     }
 }

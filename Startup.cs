@@ -41,11 +41,17 @@ namespace ADAssignment
             services.AddAuthentication()
                 .AddGoogle(options =>
                 {
-                    IConfigurationSection googleAuthNSection =
-                        Configuration.GetSection("Authentication:Google");
+                    //IConfigurationSection googleAuthNSection =
+                    //    Configuration.GetSection("Authentication:Google");
 
-                    options.ClientId = googleAuthNSection["ClientId"];
-                    options.ClientSecret = googleAuthNSection["ClientSecret"];
+                    //options.ClientId = googleAuthNSection["ClientId"];
+                    //options.ClientSecret = googleAuthNSection["ClientSecret"];
+
+                    options.ClientId = "260938471053-a7oltqs8aqntq7k843767lhvtt2j0v61.apps.googleusercontent.com";
+                    options.ClientSecret = "FOL9dvFMbhQZJRTy-FaQtZIC";
+
+                    //"Authentication:Google:ClientSecret": "FOL9dvFMbhQZJRTy-FaQtZIC",
+                    //"Authentication:Google:ClientId": "260938471053-a7oltqs8aqntq7k843767lhvtt2j0v61.apps.googleusercontent.com"
                 });
         }
 

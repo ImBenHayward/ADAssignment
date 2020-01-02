@@ -1,149 +1,124 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using ADAssignment.Data;
 using ADAssignment.Helpers;
-using ADAssignment.Migrations;
 using ADAssignment.Models;
-using Manatee.Trello;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace ADAssignment.Controllers
 {
     [Authorize]
     public class ToDoListController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        private readonly TrelloManager trelloManager;
-        private readonly List<ToDoList> cardList;
-        
+        private readonly TrelloManager _trelloManager;
+        private readonly List<ToDoList> _cardList;
 
         public ToDoListController(ApplicationDbContext context)
         {
-            //_context = context;
-            cardList = new List<ToDoList>();
-            trelloManager = new TrelloManager();
+            _cardList = new List<ToDoList>();
+            _trelloManager = new TrelloManager();
         }
 
         public async Task<IActionResult> Index()
         {
-            var cards = await trelloManager.GetCards();
+            var cards = await _trelloManager.GetCards();
 
             foreach (var card in cards)
             {
                 var model = new Models.ToDoList();
 
+                model.Id = card.Id;
                 model.Name = card.Name;
                 model.Description = card.Description;
-                model.DueDate = card.DueDate;
+                if (card.DueDate != null) model.DueDate = (DateTime) card.DueDate;
                 model.Url = card.Url;
 
-                cardList.Add(model);
+                _cardList.Add(model);
             }
 
-            return View(cardList);
+            return View(_cardList);
         }
 
-        //public IActionResult Add()
-        //{
-        //    return View();
-        //}
+        /*
+         * Add Methods
+         */
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Add(ToDoList toDoList)
-        //{
-        //    //if (ModelState.IsValid)
-        //    //{
-        //    //    _context.Add(toDoList);
-        //    //    _context.SaveChanges();
-        //    //    return RedirectToAction(nameof(Index));
-        //    //}
+        public IActionResult Add()
+        {
+            return View();
+        }
 
-        //    return View(toDoList);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Add(ToDoList toDoList)
+        {
+            if (!ModelState.IsValid) return View(toDoList);
+            await _trelloManager.AddCard(toDoList.Name, toDoList.Description, toDoList.DueDate);
+            return RedirectToAction(nameof(Index));
+        }
 
-        //public IActionResult Edit(int? id)
-        //{
-        //    //if (id == null)
-        //    //{
-        //    //    return NotFound();
-        //    //}
+        /*
+         * Edit Methods
+         */
 
-        //    //var toDoTask = _context.ToDoList.Find(id);
+        public IActionResult Edit(string id)
+        {
+            var model = new Models.ToDoList();
+            var trelloCard = _trelloManager.GetCard(id);
 
-        //    //if (toDoTask == null)
-        //    //{
-        //    //    return NotFound();
-        //    //}
+            model.Name = trelloCard.Result.Name;
+            model.Description = trelloCard.Result.Description;
+            if (trelloCard.Result.DueDate != null) trelloCard.Result.DueDate = (DateTime) trelloCard.Result.DueDate;
+            model.Url = trelloCard.Result.Url;
 
-        //    return View(toDoTask);
-        //}
+            return View(model);
+        }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Edit(int id, ToDoList toDoList)
-        //{
-        //    if (id != toDoList.Id)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(ToDoList toDoList)
+        {
+            if (ModelState.IsValid)
+            {
+                await _trelloManager.EditCard(toDoList.Id, toDoList.Name, toDoList.Description, toDoList.DueDate);
+                return RedirectToAction(nameof(Index));
+            }
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(toDoList);
-        //            _context.SaveChanges();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!ToDoTaskExists(toDoList.Id))
-        //            {
-        //                return NotFound();
-        //            }
+            return View(toDoList);
+        }
 
-        //            throw;
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(toDoList);
-        //}
+        /*
+         * Delete Methods
+         */
 
-        //public IActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //    var toDoList = _context.ToDoList
-        //        .FirstOrDefault(x => x.Id == id);
-        //    if (toDoList == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var trelloCard = await _trelloManager.GetCard(id);
 
-        //    return View(toDoList);
-        //}
+            var model = new Models.ToDoList();
 
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult DeleteConfirmed(int id)
-        //{
-        //    var toDoListItem = _context.ToDoList.Find(id);
-        //    _context.ToDoList.Remove(toDoListItem);
-        //    _context.SaveChanges();
-        //    return RedirectToAction(nameof(Index));
-        //}
+            model.Id = trelloCard.Id;
+            model.Name = trelloCard.Name;
+            model.Description = trelloCard.Description;
+            if (trelloCard.DueDate != null) model.DueDate = (DateTime) trelloCard.DueDate;
 
-        //private bool ToDoTaskExists(int id)
-        //{
-        //    return _context.ToDoList.Any(e => e.Id == id);
-        //}
+            return View(model);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(ToDoList toDoList)
+        {
+            await _trelloManager.DeleteCard(toDoList.Id);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
