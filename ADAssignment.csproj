@@ -8,6 +8,9 @@
 
 
   <ItemGroup>
+    <PackageReference Include="Google.Apis.Auth" Version="1.42.0" />
+    <PackageReference Include="Google.Apis.Calendar.v3" Version="1.42.0.1795" />
+    <PackageReference Include="Google.Cloud.Datastore.V1" Version="2.2.0" />
     <PackageReference Include="Manatee.Trello" Version="4.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="2.2.2" />

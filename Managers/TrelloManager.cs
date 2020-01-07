@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Manatee.Trello;
@@ -11,7 +13,6 @@ namespace ADAssignment.Helpers
 {
     public class TrelloManager
     {
-
         private readonly TrelloFactory trelloFactory;
 
         public TrelloManager()
@@ -85,6 +86,5 @@ namespace ADAssignment.Helpers
 
             await trelloCard.Result.Delete();
         }
-
     }
 }

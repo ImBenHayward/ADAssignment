@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using ADAssignment.Data;
 using ADAssignment.Helpers;
@@ -55,7 +57,19 @@ namespace ADAssignment.Controllers
         public async Task<IActionResult> Add(ToDoList toDoList)
         {
             if (!ModelState.IsValid) return View(toDoList);
-            await _trelloManager.AddCard(toDoList.Name, toDoList.Description, toDoList.DueDate);
+            try
+            {
+                await _trelloManager.AddCard(toDoList.Name, toDoList.Description, toDoList.DueDate);
+            }
+            catch (WebException e)
+            {
+                if (e.Status == WebExceptionStatus.Timeout)
+                {
+                    toDoList.ErrorMessage = "Could not access the Trello website, please try again later.";
+                    return View(toDoList);
+                }
+            }
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -70,7 +84,7 @@ namespace ADAssignment.Controllers
 
             model.Name = trelloCard.Result.Name;
             model.Description = trelloCard.Result.Description;
-            if (trelloCard.Result.DueDate != null) trelloCard.Result.DueDate = (DateTime) trelloCard.Result.DueDate;
+            if (trelloCard.Result.DueDate != null) model.DueDate = (DateTime) trelloCard.Result.DueDate;
             model.Url = trelloCard.Result.Url;
 
             return View(model);
@@ -82,7 +96,19 @@ namespace ADAssignment.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _trelloManager.EditCard(toDoList.Id, toDoList.Name, toDoList.Description, toDoList.DueDate);
+                try
+                {
+                    await _trelloManager.EditCard(toDoList.Id, toDoList.Name, toDoList.Description, toDoList.DueDate);
+                }
+                catch (WebException e)
+                {
+                    if (e.Status == WebExceptionStatus.Timeout)
+                    {
+                        toDoList.ErrorMessage = "Could not access the Trello website, please try again later.";
+                        return View(toDoList);
+                    }
+                }
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -116,7 +142,18 @@ namespace ADAssignment.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(ToDoList toDoList)
         {
-            await _trelloManager.DeleteCard(toDoList.Id);
+            try
+            {
+                await _trelloManager.DeleteCard(toDoList.Id);
+            }
+            catch (WebException e)
+            {
+                if (e.Status == WebExceptionStatus.Timeout)
+                {
+                    toDoList.ErrorMessage = "Could not access the Trello website, please try again later.";
+                    return View(toDoList);
+                }
+            }
 
             return RedirectToAction(nameof(Index));
         }

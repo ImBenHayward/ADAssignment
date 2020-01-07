@@ -41,6 +41,18 @@
       "frameworks": {
         "netcoreapp2.2": {
           "dependencies": {
+            "Google.Apis.Auth": {
+              "target": "Package",
+              "version": "[1.42.0, )"
+            },
+            "Google.Apis.Calendar.v3": {
+              "target": "Package",
+              "version": "[1.42.0.1795, )"
+            },
+            "Google.Cloud.Datastore.V1": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Manatee.Trello": {
               "target": "Package",
               "version": "[4.1.1, )"

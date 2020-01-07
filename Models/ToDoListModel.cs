@@ -15,7 +15,7 @@ namespace ADAssignment.Models
         public string Name { get; set; }
 
         [Required]
-        [StringLength(60, MinimumLength = 3)]
+        [StringLength(500, MinimumLength = 3)]
         public string Description { get; set; }
 
         [Required]
@@ -23,5 +23,8 @@ namespace ADAssignment.Models
         public DateTime DueDate { get; set; }
 
         public string Url { get; set; }
+
+        public string ErrorMessage { get; set; }
+        public string SuccessMessage { get; set; }
     }
 }
