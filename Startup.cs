@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ADAssignment.Data;
+﻿using ADAssignment.Data;
+using ADAssignment.Managers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,12 +19,19 @@ namespace ADAssignment
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            AzureKeyVaultManager azureKeyVaultManager = new AzureKeyVaultManager();
+
+            var googleAuthSecret = azureKeyVaultManager.GetSecret(
+                "https://wessex-key-vault.vault.azure.net/secrets/google-auth-secret/44f451bdf580449e83590706e06485cc");
+            var googleClientId = azureKeyVaultManager.GetSecret(
+                "https://wessex-key-vault.vault.azure.net/secrets/google-client-id/2fc4e6b1237f410d848e9b9037d7bfdf");
+            var dbConnectionString = azureKeyVaultManager.GetSecret(
+                "https://wessex-key-vault.vault.azure.net/secrets/db-connection-string/1c8753f9fc8647c3920477fb4dcdf90b");
+
             services.Configure<CookiePolicyOptions>(options =>
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
@@ -36,26 +39,16 @@ namespace ADAssignment
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(dbConnectionString));
 
             services.AddAuthentication()
                 .AddGoogle(options =>
                 {
-                    //IConfigurationSection googleAuthNSection =
-                    //    Configuration.GetSection("Authentication:Google");
-
-                    //options.ClientId = googleAuthNSection["ClientId"];
-                    //options.ClientSecret = googleAuthNSection["ClientSecret"];
-
-                    options.ClientId = "260938471053-a7oltqs8aqntq7k843767lhvtt2j0v61.apps.googleusercontent.com";
-                    options.ClientSecret = "FOL9dvFMbhQZJRTy-FaQtZIC";
-
-                    //"Authentication:Google:ClientSecret": "FOL9dvFMbhQZJRTy-FaQtZIC",
-                    //"Authentication:Google:ClientId": "260938471053-a7oltqs8aqntq7k843767lhvtt2j0v61.apps.googleusercontent.com"
+                    options.ClientId = googleClientId;
+                    options.ClientSecret = googleAuthSecret;
                 });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -65,7 +58,6 @@ namespace ADAssignment
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 

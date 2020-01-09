@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using ADAssignment.Managers;
 using ADAssignment.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -12,7 +9,6 @@ namespace ADAssignment.Controllers
     [Authorize]
     public class NotesController : Controller
     {
-        
         readonly NoteManager _noteManager = new NoteManager();
 
         public IActionResult Index()

@@ -1,34 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Manatee.Trello;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
-namespace ADAssignment.Helpers
+namespace ADAssignment.Managers
 {
     public class TrelloManager
     {
-        private readonly TrelloFactory trelloFactory;
+        readonly AzureKeyVaultManager _azureKeyVaultManager = new AzureKeyVaultManager();
+
+        private readonly TrelloFactory _trelloFactory;
+        public TrelloAuthorization Auth { get; }
 
         public TrelloManager()
         {
-            trelloFactory = new TrelloFactory();
-        }
+            Auth = new TrelloAuthorization()
+            {
+                AppKey = _azureKeyVaultManager.GetSecret(
+                    "https://wessex-key-vault.vault.azure.net/secrets/trello-app-key/0e5210f09ee044589b1a34a771f1483d"),
+                UserToken = _azureKeyVaultManager.GetSecret(
+                    "https://wessex-key-vault.vault.azure.net/secrets/trello-user-token/f7ceb27be47e409bbe1171f6600fc1a9")
+            };
 
-        private readonly TrelloAuthorization _auth = new TrelloAuthorization()
-        {
-            AppKey = "5b31d6c9fdcc035f3f482f8000e4d6ee",
-            UserToken = "3ead3f559527964cc9a7bfcccf25d7a4804a5064fd81b13d46bfd95612a9407e"
-        };
+            _trelloFactory = new TrelloFactory();
+        }
 
         public async Task<IBoard> GetBoard()
         {
-            var board = trelloFactory.Board("5e0b6ef2a603db30daa1fa4c", _auth);
+            var board = _trelloFactory.Board("5e0b6ef2a603db30daa1fa4c", Auth);
 
             await board.Refresh();
 
@@ -70,7 +70,6 @@ namespace ADAssignment.Helpers
 
         public async Task EditCard(string id, string name, string description, DateTime dueDate)
         {
-            //var board = GetBoard();
             var trelloCard = GetCard(id);
 
             trelloCard.Result.Name = name;

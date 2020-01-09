@@ -16,6 +16,6 @@
     <GoogleCloudPublishChoice>Gae</GoogleCloudPublishChoice>
     <GoogleAppEnginePublishPromote>True</GoogleAppEnginePublishPromote>
     <GoogleAppEnginePublishOpenWebsite>True</GoogleAppEnginePublishOpenWebsite>
-    <GoogleAppEnginePublishNextVersion>version4</GoogleAppEnginePublishNextVersion>
+    <GoogleAppEnginePublishNextVersion>version6</GoogleAppEnginePublishNextVersion>
   </PropertyGroup>
 </Project>

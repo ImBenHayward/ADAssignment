@@ -11,8 +11,5 @@ namespace ADAssignment.Data
             : base(options)
         {
         }
-
-        public DbSet<ToDoList> ToDoList { get; set; }
-
     }
 }

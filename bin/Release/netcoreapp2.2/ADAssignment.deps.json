@@ -24,6 +24,9 @@
     ".NETCoreApp,Version=v2.2": {
       "ADAssignment/1.0.0": {
         "dependencies": {
+          "Google.Apis.Auth": "1.42.0",
+          "Google.Apis.Calendar.v3": "1.42.0.1795",
+          "Google.Cloud.Datastore.V1": "2.2.0",
           "Manatee.Trello": "4.1.1",
           "Microsoft.AspNetCore.App": "2.2.0",
           "Microsoft.AspNetCore.Authentication.Google": "2.2.2",
@@ -38,6 +41,223 @@
         },
         "compile": {
           "ADAssignment.dll": {}
+        }
+      },
+      "Google.Api.CommonProtos/1.7.0": {
+        "dependencies": {
+          "Google.Protobuf": "3.8.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Api.CommonProtos.dll": {
+            "assemblyVersion": "1.7.0.0",
+            "fileVersion": "1.7.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Api.CommonProtos.dll": {}
+        }
+      },
+      "Google.Api.Gax/2.10.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "11.0.2",
+          "System.Interactive.Async": "3.2.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Api.Gax.dll": {
+            "assemblyVersion": "2.10.0.0",
+            "fileVersion": "2.10.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Api.Gax.dll": {}
+        }
+      },
+      "Google.Api.Gax.Grpc/2.10.0": {
+        "dependencies": {
+          "Google.Api.CommonProtos": "1.7.0",
+          "Google.Api.Gax": "2.10.0",
+          "Google.Apis.Auth": "1.42.0",
+          "Grpc.Auth": "1.22.0",
+          "Grpc.Core": "1.22.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Api.Gax.Grpc.dll": {
+            "assemblyVersion": "2.10.0.0",
+            "fileVersion": "2.10.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Api.Gax.Grpc.dll": {}
+        }
+      },
+      "Google.Apis/1.42.0": {
+        "dependencies": {
+          "Google.Apis.Core": "1.42.0",
+          "Newtonsoft.Json": "11.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.dll": {
+            "assemblyVersion": "1.42.0.0",
+            "fileVersion": "1.42.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.dll": {}
+        }
+      },
+      "Google.Apis.Auth/1.42.0": {
+        "dependencies": {
+          "Google.Apis": "1.42.0",
+          "Google.Apis.Core": "1.42.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Auth.PlatformServices.dll": {
+            "assemblyVersion": "1.42.0.0",
+            "fileVersion": "1.42.0.0"
+          },
+          "lib/netstandard2.0/Google.Apis.Auth.dll": {
+            "assemblyVersion": "1.42.0.0",
+            "fileVersion": "1.42.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.Auth.PlatformServices.dll": {},
+          "lib/netstandard2.0/Google.Apis.Auth.dll": {}
+        }
+      },
+      "Google.Apis.Calendar.v3/1.42.0.1795": {
+        "dependencies": {
+          "Google.Apis": "1.42.0",
+          "Google.Apis.Auth": "1.42.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Calendar.v3.dll": {
+            "assemblyVersion": "1.42.0.1795",
+            "fileVersion": "1.42.0.1795"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.Calendar.v3.dll": {}
+        }
+      },
+      "Google.Apis.Core/1.42.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "11.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Core.dll": {
+            "assemblyVersion": "1.42.0.0",
+            "fileVersion": "1.42.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.Core.dll": {}
+        }
+      },
+      "Google.Cloud.Datastore.V1/2.2.0": {
+        "dependencies": {
+          "Google.Api.Gax.Grpc": "2.10.0",
+          "Grpc.Core": "1.22.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Cloud.Datastore.V1.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Cloud.Datastore.V1.dll": {}
+        }
+      },
+      "Google.Protobuf/3.8.0": {
+        "dependencies": {
+          "System.Memory": "4.5.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Protobuf.dll": {
+            "assemblyVersion": "3.8.0.0",
+            "fileVersion": "3.8.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Protobuf.dll": {}
+        }
+      },
+      "Grpc.Auth/1.22.0": {
+        "dependencies": {
+          "Google.Apis.Auth": "1.42.0",
+          "Grpc.Core": "1.22.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Grpc.Auth.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.22.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Grpc.Auth.dll": {}
+        }
+      },
+      "Grpc.Core/1.22.1": {
+        "dependencies": {
+          "Grpc.Core.Api": "1.22.1",
+          "System.Interactive.Async": "3.2.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Grpc.Core.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.22.1.0"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/linux/native/libgrpc_csharp_ext.x64.so": {
+            "rid": "linux",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux/native/libgrpc_csharp_ext.x86.so": {
+            "rid": "linux",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx/native/libgrpc_csharp_ext.x64.dylib": {
+            "rid": "osx",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx/native/libgrpc_csharp_ext.x86.dylib": {
+            "rid": "osx",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win/native/grpc_csharp_ext.x64.dll": {
+            "rid": "win",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win/native/grpc_csharp_ext.x86.dll": {
+            "rid": "win",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Grpc.Core.dll": {}
+        }
+      },
+      "Grpc.Core.Api/1.22.1": {
+        "dependencies": {
+          "System.Interactive.Async": "3.2.0",
+          "System.Memory": "4.5.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Grpc.Core.Api.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.22.1.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Grpc.Core.Api.dll": {}
         }
       },
       "Manatee.Json/11.0.4": {
@@ -3645,6 +3865,90 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Google.Api.CommonProtos/1.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RQG8nYUb+B1CKxXqtXBy7Kfj4r0c3mE4itQaFHuLzf7BXPeAOHPRKgU02kemBmuNMeJ+GSK+6D/RrFkjSFxvOA==",
+      "path": "google.api.commonprotos/1.7.0",
+      "hashPath": "google.api.commonprotos.1.7.0.nupkg.sha512"
+    },
+    "Google.Api.Gax/2.10.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3zcUP57Fn7sRcJfon41N1/F0Lcv59k4bameEDSmPDHEs/sjOViwu0Codur2UOCPpiduXCz2A34QTBoyewtSemg==",
+      "path": "google.api.gax/2.10.0",
+      "hashPath": "google.api.gax.2.10.0.nupkg.sha512"
+    },
+    "Google.Api.Gax.Grpc/2.10.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-399TRa3/dyFGemIY8X+wPgcyTb0UrIpn5608+WUSp65KuKfCQLCJ0kaAG0siOZdK4p1uImB6kVf9ASINldSciQ==",
+      "path": "google.api.gax.grpc/2.10.0",
+      "hashPath": "google.api.gax.grpc.2.10.0.nupkg.sha512"
+    },
+    "Google.Apis/1.42.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0xvGzOv3XDmifq9SXws9MjWttiIwsOtCQ93ic1eUFBSrO/4wFRaEFi6myRs34mGGOhf6ROk2gJ4WgZg2TBpbEg==",
+      "path": "google.apis/1.42.0",
+      "hashPath": "google.apis.1.42.0.nupkg.sha512"
+    },
+    "Google.Apis.Auth/1.42.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-oXzljSx9Skx08Jp+kQfBUj/UqT/0x6IdfFZL/mnjTLa4y07KYVvhxHcx5T4VYQ79NaDstygSyU2ZYn6RLrLBOw==",
+      "path": "google.apis.auth/1.42.0",
+      "hashPath": "google.apis.auth.1.42.0.nupkg.sha512"
+    },
+    "Google.Apis.Calendar.v3/1.42.0.1795": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WrZt44DhkKpG4xEvVZxy2UNUs0N7pAH8f/zsbPNwYVXt4DSzObsrxfBCB9DyDu9ant9egDVP2mlJOeRhIbegYg==",
+      "path": "google.apis.calendar.v3/1.42.0.1795",
+      "hashPath": "google.apis.calendar.v3.1.42.0.1795.nupkg.sha512"
+    },
+    "Google.Apis.Core/1.42.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6h04xA9Ez83OUDNU68NOG4eQtm3uxSqhqHlV+lefF8tvbOiEVPfreJzXjCDmnsgJVjIdSIoMdKr9Kt8yIqx+fg==",
+      "path": "google.apis.core/1.42.0",
+      "hashPath": "google.apis.core.1.42.0.nupkg.sha512"
+    },
+    "Google.Cloud.Datastore.V1/2.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ZgxNXZ8AfFc3FmteDd1PWfe1Kkt9oJLLQcmrUn0O73W8pI6PsTMv65lYgqyEL/72zdxqNBtZ0F7A/E5mAYHM3Q==",
+      "path": "google.cloud.datastore.v1/2.2.0",
+      "hashPath": "google.cloud.datastore.v1.2.2.0.nupkg.sha512"
+    },
+    "Google.Protobuf/3.8.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-BFgHpY9TySZWcC5FWfNio54kBx75VlgLY1uGVyYmn80xUew794FP8YHLrEuf+lEQSYT1IVyigvsAOZv+ZQkf+g==",
+      "path": "google.protobuf/3.8.0",
+      "hashPath": "google.protobuf.3.8.0.nupkg.sha512"
+    },
+    "Grpc.Auth/1.22.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-88m1CFUV7OAFhwHXzLiwFbDEj3d72+OK6wbMlzgKcg5CA+nVoRQxtcZacqlbhVcnFoV8gm9WhizxxcNl1FnY8Q==",
+      "path": "grpc.auth/1.22.0",
+      "hashPath": "grpc.auth.1.22.0.nupkg.sha512"
+    },
+    "Grpc.Core/1.22.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9LbGg04eTkoGPK/eEk9em+QGe7aGfm7B7DcMW3vu8LVNuuhk7pCO8/KkqGobKq3Kqv7OTeCkuPKJcWu5fxpDUg==",
+      "path": "grpc.core/1.22.1",
+      "hashPath": "grpc.core.1.22.1.nupkg.sha512"
+    },
+    "Grpc.Core.Api/1.22.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-i0TkxAXAqsy2gL9NEQPqLAKJP3xz9uqBhtEZJJhr85YGnpzhq/IKhqVo+nPBYw8+MRmOKnJtjVkLR2xJuL0Kag==",
+      "path": "grpc.core.api/1.22.1",
+      "hashPath": "grpc.core.api.1.22.1.nupkg.sha512"
     },
     "Manatee.Json/11.0.4": {
       "type": "package",

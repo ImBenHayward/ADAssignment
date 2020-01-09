@@ -53,6 +53,10 @@
               "target": "Package",
               "version": "[2.2.0, )"
             },
+            "Google.Cloud.Kms.V1": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
             "Manatee.Trello": {
               "target": "Package",
               "version": "[4.1.1, )"
@@ -71,6 +75,14 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[2.2.0, )"
+            },
+            "Microsoft.Azure.KeyVault": {
+              "target": "Package",
+              "version": "[3.0.4, )"
+            },
+            "Microsoft.IdentityModel.Clients.ActiveDirectory": {
+              "target": "Package",
+              "version": "[5.2.5, )"
             },
             "Microsoft.NETCore.App": {
               "suppressParent": "All",

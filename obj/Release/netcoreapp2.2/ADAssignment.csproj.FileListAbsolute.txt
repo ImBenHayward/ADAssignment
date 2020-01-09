@@ -69,3 +69,7 @@ D:\Development\AdvancedDevelopment\ADAssignment\ADAssignment\obj\Release\netcore
 D:\Development\AdvancedDevelopment\ADAssignment\ADAssignment\obj\Release\netcoreapp2.2\ADAssignment.dll
 D:\Development\AdvancedDevelopment\ADAssignment\ADAssignment\obj\Release\netcoreapp2.2\ADAssignment.pdb
 D:\Development\AdvancedDevelopment\ADAssignment\ADAssignment\obj\Release\netcoreapp2.2\ADAssignment.csproj.CopyComplete
+D:\Development\AdvancedDevelopment\ADAssignment\ADAssignment\obj\Release\netcoreapp2.2\Razor\Views\Notes\Add.cshtml.g.cs
+D:\Development\AdvancedDevelopment\ADAssignment\ADAssignment\obj\Release\netcoreapp2.2\Razor\Views\Notes\Delete.cshtml.g.cs
+D:\Development\AdvancedDevelopment\ADAssignment\ADAssignment\obj\Release\netcoreapp2.2\Razor\Views\Notes\Edit.cshtml.g.cs
+D:\Development\AdvancedDevelopment\ADAssignment\ADAssignment\obj\Release\netcoreapp2.2\Razor\Views\Notes\Index.cshtml.g.cs

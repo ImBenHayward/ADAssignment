@@ -12,7 +12,7 @@
             <img src="~/css/images/trello-logo.png" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Trello To-Do List</h5>
-                <p class="card-text">Our To-Do List automatically syncs with Trello, making it easy to keep on top of tasks.</p>
+                <p class="card-text">The To-Do list uses the Trello API to create new Trello Cards from the user input. Users are able to create, read, update and delete cards.</p>
                 <a class="btn btn-primary" asp-controller="ToDoList" asp-action="Index">To Do-List</a>
             </div>
         </div>
@@ -20,8 +20,16 @@
             <img src="~/css/images/google-cloud.png" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">NoSQL Notebook</h5>
-                <p class="card-text">Create, edit and update notes using the No SQL Notebook, hosted on Google's Datastore! </p>
+                <p class="card-text">Create, read, update and delete notes using the Notebook. The Notebook utilises NoSQL technology and is stored using Google's Datastore.</p>
                 <a class="btn btn-primary" asp-controller="Notes" asp-action="Index">Notebook</a>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img src="~/css/images/Azure-logo-1.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Azure Key Vault</h5>
+                <p class="card-text">Sensitive data such as API keys, secrets and connection strings are stored in the cloud and retrieved using Azure's Key Vault service for improved security.</p>
+                <a href="https://azure.microsoft.com/en-gb/services/key-vault/" class="btn btn-primary">More Information</a>
             </div>
         </div>
     </div>

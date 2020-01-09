@@ -1,5 +1,3 @@
-using System;
-
 namespace ADAssignment.Models
 {
     public class ErrorViewModel

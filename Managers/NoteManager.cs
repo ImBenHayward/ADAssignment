@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using ADAssignment.Models;
-using Google.Apis.Auth.OAuth2;
-using Google.Apis.Calendar.v3.Data;
-using Google.Apis.Logging;
 using Google.Cloud.Datastore.V1;
-using Grpc.Core;
-using Manatee.Json.Path;
 
 namespace ADAssignment.Managers
 {
@@ -58,7 +49,7 @@ namespace ADAssignment.Managers
                 Category = (string) entity["Category"],
                 NoteBody = (string) entity["NoteBody"]
             };
-            
+
             return note;
         }
 
@@ -74,7 +65,7 @@ namespace ADAssignment.Managers
                 ["NoteBody"] = note.NoteBody
             };
 
-           _db.Insert(noteEntity);
+            _db.Insert(noteEntity);
         }
 
         public void EditNote(Note note)
@@ -98,6 +89,5 @@ namespace ADAssignment.Managers
 
             _db.Delete(entity);
         }
-
     }
 }
