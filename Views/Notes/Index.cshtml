@@ -1,52 +1,23 @@
 ﻿@model List<Note>
 
-
 <h1>Notebook</h1>
-<br/>
-<p>
-    <a asp-action="Add" class="btn btn-primary">Add a Note</a>
-</p>
 
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.First().Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().Category)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().NoteBody)
-        </th>
-        <th>
-            Edit
-        </th>
-        <th>
-            Delete
-        </th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NoteBody)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-primary">Edit</a>
-            </td>
-            <td>
-                <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-danger">Delete</a>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+<p>The Notebook has full CRUD capability and is hosted on Google Datastore, and is queried using NoSQL technology.</p>
+
+<a asp-action="Add" asp-route-category="" class="btn btn-primary">Add a Note</a>
+
+<br/>
+
+<div class="card card-margin">
+    <div class="card-header">
+        <h5>Note Categories:</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+        @foreach (Category category in (Category[]) Enum.GetValues(typeof(Category)))
+        {
+            <li class="list-group-item">
+                @category<a asp-action="Category" asp-route-category="@category" class="btn btn-primary btn-right">View Notes</a>
+            </li>
+        }
+    </ul>
+</div>

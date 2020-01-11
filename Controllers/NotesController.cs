@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ADAssignment.Managers;
 using ADAssignment.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -18,6 +19,13 @@ namespace ADAssignment.Controllers
             return View(notes);
         }
 
+        public IActionResult Category(string category)
+        {
+            var notes = _noteManager.GetNotesForCategory(category);
+
+            return View(notes);
+        }
+
         public List<Note> GetNotes()
         {
             var notes = _noteManager.GetNotes();
@@ -25,9 +33,13 @@ namespace ADAssignment.Controllers
             return notes;
         }
 
-        public IActionResult Add()
+        public IActionResult Add(Category? category)
         {
-            return View();
+            Note note = new Note();
+
+            note.Category = category;
+
+            return View(note);
         }
 
         [HttpPost]
@@ -71,6 +83,12 @@ namespace ADAssignment.Controllers
             _noteManager.DeleteNote(note);
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult ViewNote(long id)
+        {
+            var note = _noteManager.GetNote(id);
+            return View(note);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using ADAssignment.Models;
 using Google.Cloud.Datastore.V1;
@@ -26,10 +27,38 @@ namespace ADAssignment.Managers
 
             foreach (var entity in results.Entities)
             {
+                Enum.TryParse($"{entity["Category"].StringValue}", out Category categoryName);
+
                 Note note = new Note();
-                note.id = entity.Key.Path[0].Id;
+                note.Id = entity.Key.Path[0].Id;
                 note.Title = (string) entity["Title"];
-                note.Category = (string) entity["Category"];
+                note.Category = categoryName;
+                note.NoteBody = (string) entity["NoteBody"];
+                notes.Add(note);
+            }
+
+            return notes;
+        }
+
+        public List<Note> GetNotesForCategory(string category)
+        {
+            List<Note> notes = new List<Note>();
+
+            Query query = new Query("Note")
+            {
+                Filter = Filter.Equal("Category", category)
+            };
+
+            DatastoreQueryResults results = _db.RunQuery(query);
+
+            foreach (var entity in results.Entities)
+            {
+                Enum.TryParse($"{entity["Category"].StringValue}", out Category categoryName);
+
+                Note note = new Note();
+                note.Id = entity.Key.Path[0].Id;
+                note.Title = (string) entity["Title"];
+                note.Category = categoryName;
                 note.NoteBody = (string) entity["NoteBody"];
                 notes.Add(note);
             }
@@ -43,11 +72,14 @@ namespace ADAssignment.Managers
             var key = keyFactory.CreateKey(id);
             var entity = _db.Lookup(key);
 
+            Enum.TryParse($"{entity["Category"].StringValue}", out Category category);
+
             var note = new Note()
             {
                 Title = (string) entity["Title"],
-                Category = (string) entity["Category"],
-                NoteBody = (string) entity["NoteBody"]
+                Category = category,
+                NoteBody = (string) entity["NoteBody"],
+                Id = id
             };
 
             return note;
@@ -61,7 +93,7 @@ namespace ADAssignment.Managers
             {
                 Key = keyFactory.CreateIncompleteKey(),
                 ["Title"] = note.Title,
-                ["Category"] = note.Category,
+                ["Category"] = note.Category.ToString(),
                 ["NoteBody"] = note.NoteBody
             };
 
@@ -71,11 +103,11 @@ namespace ADAssignment.Managers
         public void EditNote(Note note)
         {
             KeyFactory keyFactory = _db.CreateKeyFactory("Note");
-            var key = keyFactory.CreateKey(note.id);
+            var key = keyFactory.CreateKey(note.Id);
             var entity = _db.Lookup(key);
 
             entity["Title"] = note.Title;
-            entity["Category"] = note.Category;
+            entity["Category"] = note.Category.ToString();
             entity["NoteBody"] = note.NoteBody;
 
             _db.Update(entity);
@@ -84,7 +116,7 @@ namespace ADAssignment.Managers
         public void DeleteNote(Note note)
         {
             KeyFactory keyFactory = _db.CreateKeyFactory("Note");
-            var key = keyFactory.CreateKey(note.id);
+            var key = keyFactory.CreateKey(note.Id);
             var entity = _db.Lookup(key);
 
             _db.Delete(entity);

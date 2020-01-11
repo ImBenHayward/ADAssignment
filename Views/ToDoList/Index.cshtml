@@ -1,8 +1,12 @@
-﻿@using System.Security.Cryptography.X509Certificates
+﻿@using System.Globalization
 @model List<ToDoList>
 
-<h1>Trello Cards</h1>
-<br/>
+<h1>Trello To-Do List</h1>
+
+<p>The To-Do List is fully synchronsied with Trello through the API. Users can add, edit and delete cards in the board using the To-Do List tool.
+
+<div class="alert alert-info">click the <b>Card Name</b> to be redirected to the respective card on Trello's website!</div>
+
 @foreach (var item in (Model))
 {
     if (item.ErrorMessage != null)
@@ -23,46 +27,45 @@
     <a asp-action="Add" class="btn btn-primary">Add a Task</a>
 </p>
 
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.First().Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().DueDate)
-        </th>
-        <th>
-            Edit
-        </th>
-        <th>
-            Delete
-        </th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model)
-    {
+<div class="card card-margin">
+    <table class="table table-hover">
+        <thead class="thead-light">
         <tr>
-            <td>
-                <a href="@item.Url">@Html.DisplayFor(modelItem => item.Name)</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DueDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
-            </td>
-            <td>
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().DueDate)
+            </th>
+            <th>
+                Edit/Delete
+            </th>
         </tr>
-    }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            var dueDate = @item.DueDate.ToString("MM/dd/yyyy hh:mm");
+
+            <tr>
+                <td>
+                    <a href="@item.Url" target="_blank">@Html.DisplayFor(modelItem => item.Name)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @dueDate
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

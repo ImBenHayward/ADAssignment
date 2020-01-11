@@ -1,4 +1,4 @@
-﻿@model ADAssignment.Models.Note
+﻿@model Note
 
 @{
     ViewData["Title"] = "Add";
@@ -7,38 +7,50 @@
 <h1>Add a New Note</h1>
 
 <h4>Add Note</h4>
-<hr />
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Add">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
+                <input asp-for="Title" class="form-control"/>
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Category" class="control-label"></label>
-                <input asp-for="Category" class="form-control" />
+                <select asp-for="Category" asp-items="Html.GetEnumSelectList<Category>()" class="form-control">
+                    <option value=""></option>
+                </select>
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="NoteBody" class="control-label"></label>
-                <input asp-for="NoteBody" class="form-control" />
+                <textarea asp-for="NoteBody" class="form-control" rows="5"></textarea>
                 <span asp-validation-for="NoteBody" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Add" class="btn btn-primary" />
+                <input type="submit" value="Add" class="btn btn-primary"/>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to Notebook</a>
-</div>
+@if (Model.Category != null)
+{
+    <div>
+        <a asp-action="Category" asp-route-category="@Model.Category">Back to @Model.Category Notes</a>
+    </div>
+}
+else
+{
+    <div>
+        <a asp-action="Index">Back to Notebook</a>
+    </div>
+}
+
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
     <script src="~/js/custom-validation.js"></script>
 }

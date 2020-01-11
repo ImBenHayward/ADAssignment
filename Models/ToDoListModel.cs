@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ADAssignment.Models
 {
@@ -12,6 +9,7 @@ namespace ADAssignment.Models
 
         [Required]
         [StringLength(60, MinimumLength = 3)]
+        [Display(Name="Card Name")]
         public string Name { get; set; }
 
         [Required]

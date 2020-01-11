@@ -1,12 +1,20 @@
-﻿namespace ADAssignment.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ADAssignment.Models
 {
     public class Note
     {
-        public long id { get; set; }
+        public long Id { get; set; }
+
+        [Required]
         public string Title { get; set; }
 
+        [Required]
+        [Display(Name="Contents")]
+        [StringLength(1500, MinimumLength = 3)]
         public string NoteBody { get; set; }
 
-        public string Category { get; set; }
+        [Required]
+        public Category? Category { get; set; }
     }
 }

@@ -73,3 +73,5 @@ D:\Development\AdvancedDevelopment\ADAssignment\ADAssignment\obj\Debug\netcoreap
 D:\Development\AdvancedDevelopment\ADAssignment\ADAssignment\obj\Debug\netcoreapp2.2\Razor\Views\Notes\Add.cshtml.g.cs
 D:\Development\AdvancedDevelopment\ADAssignment\ADAssignment\obj\Debug\netcoreapp2.2\Razor\Views\Notes\Edit.cshtml.g.cs
 D:\Development\AdvancedDevelopment\ADAssignment\ADAssignment\obj\Debug\netcoreapp2.2\Razor\Views\Notes\Delete.cshtml.g.cs
+D:\Development\AdvancedDevelopment\ADAssignment\ADAssignment\obj\Debug\netcoreapp2.2\Razor\Views\Notes\ViewNote.cshtml.g.cs
+D:\Development\AdvancedDevelopment\ADAssignment\ADAssignment\obj\Debug\netcoreapp2.2\Razor\Views\Notes\Category.cshtml.g.cs

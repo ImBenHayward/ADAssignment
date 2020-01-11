@@ -1,0 +1,28 @@
+﻿@model List<Note>
+
+<h1>Notebook</h1>
+
+<p>The Notebook has full CRUD capability and is hosted on Google Datastore, and is queried using NoSQL technology.</p>
+<p class="alert alert-info">To <b>edit</b> or <b>delete</b> an existing note, click 'View Note'.</p>
+
+<a asp-action="Add" asp-route-category="@Model.FirstOrDefault()?.Category" class="btn btn-primary">Add a Note</a>
+<br/>
+
+<div class="card card-margin">
+    <div class="card-header">
+        <h5>@Model.FirstOrDefault()?.Category Notes:</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+        @foreach (var item in Model)
+        {
+            <li class="list-group-item">
+                <a asp-action="ViewNote" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Title)</a><a asp-action="ViewNote" asp-route-id="@item.Id" class="btn btn-primary btn-right">View Note</a>
+            </li>
+        }
+    </ul>
+</div>
+
+<br/>
+<div>
+    <a asp-action="Index">Back to Categories</a>
+</div>
