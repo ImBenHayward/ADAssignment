@@ -94,7 +94,7 @@ namespace ADAssignment.Managers
                 Key = keyFactory.CreateIncompleteKey(),
                 ["Title"] = note.Title,
                 ["Category"] = note.Category.ToString(),
-                ["NoteBody"] = note.NoteBody
+                ["NoteBody"] = note.NoteBody,
             };
 
             _db.Insert(noteEntity);

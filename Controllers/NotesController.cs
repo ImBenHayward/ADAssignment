@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Schema;
 using ADAssignment.Managers;
 using ADAssignment.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -33,6 +34,12 @@ namespace ADAssignment.Controllers
             return notes;
         }
 
+        public IActionResult ViewNote(long id)
+        {
+            var note = _noteManager.GetNote(id);
+            return View(note);
+        }
+
         public IActionResult Add(Category? category)
         {
             Note note = new Note();
@@ -50,7 +57,9 @@ namespace ADAssignment.Controllers
 
             _noteManager.AddNote(note);
 
-            return RedirectToAction(nameof(Index));
+            var noteCategory = note.Category;
+
+            return RedirectToAction("Category", new { category = noteCategory });
         }
 
         public IActionResult Edit(long id)
@@ -67,12 +76,13 @@ namespace ADAssignment.Controllers
 
             _noteManager.EditNote(note);
 
-            return RedirectToAction(nameof(Index));
+            return View("ViewNote", note);
         }
 
         public IActionResult Delete(long id)
         {
             var note = _noteManager.GetNote(id);
+
             return View(note);
         }
 
@@ -82,13 +92,9 @@ namespace ADAssignment.Controllers
         {
             _noteManager.DeleteNote(note);
 
-            return RedirectToAction(nameof(Index));
-        }
+            var noteCategory = note.Category.ToString();
 
-        public IActionResult ViewNote(long id)
-        {
-            var note = _noteManager.GetNote(id);
-            return View(note);
+            return RedirectToAction("Category", new { category = noteCategory });
         }
     }
 }

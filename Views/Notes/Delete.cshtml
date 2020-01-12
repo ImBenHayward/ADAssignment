@@ -34,8 +34,9 @@
     </dl>
 
     <form asp-action="Delete">
-        <input type="hidden" asp-for="@Model.Id"/>
-        <input type="submit" value="Delete" class="btn btn-danger"/>
+        <input type="hidden" asp-for="@Model.Id" />
+        <input type="hidden" asp-for="@Model.Category" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
         <a asp-action="Index" class="btn btn-primary">Go Back</a>
     </form>
 </div>
