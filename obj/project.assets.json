@@ -2,6 +2,9 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.2": {
+      "glyphicon/1.0.1": {
+        "type": "package"
+      },
       "Google.Api.CommonProtos/1.7.0": {
         "type": "package",
         "dependencies": {
@@ -5227,6 +5230,18 @@
     }
   },
   "libraries": {
+    "glyphicon/1.0.1": {
+      "sha512": "eysBKGjcKFb4mdk04ZlStZUuDjaaql2/XuCNhCJtQZaCmsV3+iT5ogACJUEOXrb7/hlirlcTwDpoJB8raWPaYw==",
+      "type": "package",
+      "path": "glyphicon/1.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Content/App_Code/GlyphIcon.cshtml",
+        "glyphicon.1.0.1.nupkg.sha512",
+        "glyphicon.nuspec"
+      ]
+    },
     "Google.Api.CommonProtos/1.7.0": {
       "sha512": "RQG8nYUb+B1CKxXqtXBy7Kfj4r0c3mE4itQaFHuLzf7BXPeAOHPRKgU02kemBmuNMeJ+GSK+6D/RrFkjSFxvOA==",
       "type": "package",
@@ -14297,7 +14312,8 @@
       "Microsoft.NETCore.App >= 2.2.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.2.4",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 2.2.4",
-      "Npgsql.EntityFrameworkCore.PostgreSQL.Design >= 1.1.0"
+      "Npgsql.EntityFrameworkCore.PostgreSQL.Design >= 1.1.0",
+      "glyphicon >= 1.0.1"
     ]
   },
   "packageFolders": {
@@ -14401,6 +14417,10 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL.Design": {
             "target": "Package",
             "version": "[1.1.0, )"
+          },
+          "glyphicon": {
+            "target": "Package",
+            "version": "[1.0.1, )"
           }
         },
         "imports": [

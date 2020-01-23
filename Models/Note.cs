@@ -7,6 +7,7 @@ namespace ADAssignment.Models
         public long Id { get; set; }
 
         [Required]
+        [StringLength(50, MinimumLength = 3)]
         public string Title { get; set; }
 
         [Required]

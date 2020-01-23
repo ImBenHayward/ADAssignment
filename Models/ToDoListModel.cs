@@ -9,7 +9,7 @@ namespace ADAssignment.Models
 
         [Required]
         [StringLength(60, MinimumLength = 3)]
-        [Display(Name="Card Name")]
+        [Display(Name = "Card Name")]
         public string Name { get; set; }
 
         [Required]
@@ -23,6 +23,7 @@ namespace ADAssignment.Models
         public string Url { get; set; }
 
         public string ErrorMessage { get; set; }
+
         public string SuccessMessage { get; set; }
     }
 }

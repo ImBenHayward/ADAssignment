@@ -100,3 +100,12 @@ body {
 .button-stack {
     display: block;
 }
+
+.action-btn {
+    display: block;
+    width: 80px;
+    height: 25px;
+    margin: 5px;
+    padding: 0px;
+    font-size: medium;
+}

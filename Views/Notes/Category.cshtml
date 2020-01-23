@@ -16,7 +16,7 @@
         @foreach (var item in Model)
         {
             <li class="list-group-item">
-                <a asp-action="ViewNote" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Title)</a><a asp-action="ViewNote" asp-route-id="@item.Id" class="btn btn-primary btn-right">View Note</a>
+                <a asp-action="ViewNote" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Title)</a><a asp-action="ViewNote" asp-route-id="@item.Id" class="btn btn-success btn-right">View Note</a>
             </li>
         }
     </ul>
